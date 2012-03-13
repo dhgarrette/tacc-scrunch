@@ -1,16 +1,16 @@
 package example
 
-import com.cloudera.crunch.io.{ From => from, To => to }
+import com.cloudera.crunch.io.{ From => from }
 import com.cloudera.scrunch._
 import com.cloudera.scrunch.Conversions._
 
-class WordCount
+class WordCountMaterialize
 
-object WordCount {
+object WordCountMaterialize {
   def main(args: Array[String]) {
-    val List(inputFile, outputFile) = args.toList
+    val List(inputFile) = args.toList
 
-    val pipeline = new Pipeline[WordCount]
+    val pipeline = new Pipeline[WordCountMaterialize]
 
     val counts =
       pipeline.read(from.textFile(inputFile))
@@ -18,7 +18,7 @@ object WordCount {
         .filter(_.nonEmpty)
         .count
 
-    counts.write(to.textFile(outputFile))
+    println(counts.materialize)
   }
 }
 
