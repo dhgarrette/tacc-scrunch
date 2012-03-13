@@ -23,9 +23,11 @@ Add the following to `~/.profile_user` and `job.hadoop.new`:
 
 ## Testing the setup
 
-   echo "this is a test . this test is short ." > example.txt
-   hadoop fs -put example.txt example.txt
-   hadoop jar target/tacc-scrunch-assembly-0.0.1.jar example.WordCount example.txt example.wc
+    echo "this is a test . this test is short ." > example.txt
+    hadoop fs -put example.txt example.txt
+    hadoop jar target/tacc-scrunch-assembly-0.0.1.jar example.WordCount example.txt example.wc
+    hadoop fs -getmerge example.wc example.wc
+    cat example.wc
  
 
 
