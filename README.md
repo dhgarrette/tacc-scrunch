@@ -23,13 +23,26 @@ Add the following to `~/.profile_user` and `job.hadoop.new`:
 
 ## Testing the setup
 
-    $ echo "this is a test . this test is short ." > example.txt
-    $ hadoop fs -put example.txt example.txt
-    $ hadoop jar target/tacc-scrunch-assembly-0.0.1.jar example.WordCountMaterialize example.txt
-    List((a,1), (is,2), (short,1), (test,2), (this,2))
-    $ hadoop jar target/tacc-scrunch-assembly-0.0.1.jar example.WordCount example.txt example.wc
-    $ hadoop fs -getmerge example.wc example.wc
-    $ cat example.wc
- 
+Package a jar:
 
+    sbt assembly
+    
+Make some data:
+    
+    echo "this is a test . this test is short ." > example.txt
+    hadoop fs -put example.txt example.txt
+
+Run the `materialize` example:
+
+    hadoop jar target/tacc-scrunch-assembly.jar example.WordCountMaterialize example.txt
+    
+This will produce
+
+    List((a,1), (is,2), (short,1), (test,2), (this,2))
+
+Run the file-output example:
+
+    hadoop jar target/tacc-scrunch-assembly.jar example.WordCount example.txt example.wc
+    hadoop fs -getmerge example.wc example.wc
+    cat example.wc
 

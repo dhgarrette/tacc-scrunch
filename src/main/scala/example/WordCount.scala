@@ -10,15 +10,14 @@ object WordCount {
   def main(args: Array[String]) {
     val List(inputFile, outputFile) = args.toList
 
-    val pipeline = new Pipeline[WordCount]
-
     val counts =
-      pipeline.read(from.textFile(inputFile))
+      new Pipeline[WordCount]
+        .read(from.textFile(inputFile))
         .flatMap(_.toLowerCase.split("\\W+"))
         .filter(_.nonEmpty)
         .count
 
     counts.write(to.textFile(outputFile))
+
   }
 }
-

@@ -32,5 +32,7 @@ libraryDependencies ++= Seq(
   )
 )
 
+jarName in assembly := "tacc-scrunch-assembly.jar"
+
 seq(assemblySettings: _*)
 
