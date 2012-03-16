@@ -10,14 +10,18 @@ object WordCountMaterialize {
   def main(args: Array[String]) {
     val List(inputFile) = args.toList
 
+    val pipeline = new Pipeline[WordCountMaterialize]
+
     val counts =
-      new Pipeline[WordCountMaterialize]
+      pipeline
         .read(from.textFile(inputFile))
         .flatMap(_.toLowerCase.split("\\W+"))
         .filter(_.nonEmpty)
         .count
 
-    println(counts.materialize)
+    println(counts.materialize.toList)
+
+    pipeline.done
 
   }
 }
