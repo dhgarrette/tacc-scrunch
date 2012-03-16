@@ -46,3 +46,10 @@ Run the file-output example:
     hadoop fs -getmerge example.wc example.wc
     cat example.wc
 
+This will produce
+
+	a	1
+	is	2
+	short	1
+	test	2
+	this	2

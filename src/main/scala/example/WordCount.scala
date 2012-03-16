@@ -18,9 +18,10 @@ object WordCount {
         .flatMap(_.toLowerCase.split("\\W+"))
         .filter(_.nonEmpty)
         .count
-        .map { case (w, c) => "%d\t%s".format(c, w) }
 
-    pipeline.writeTextFile(counts, outputFile)
+    val strings = counts.map { case (w, c) => "%s\t%d".format(w, c) }
+
+    pipeline.writeTextFile(strings, outputFile)
 
     pipeline.done
 
